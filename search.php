@@ -14,7 +14,7 @@
     <div class="search">
     	<i> </i>
     	<div class="s-bar">
-    	   <form action=""  enctype="application/x-www-form-urlencoded">
+    	  <form action=""  enctype="application/x-www-form-urlencoded">
     		<input id="phone" type="text"  value="Phone Number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search Template';}">
     		<input type="button" onClick="sub()" value="Search"/>
     	  </form>
@@ -28,37 +28,38 @@
     var phoneNum = document.getElementById('phone').value;
     // alert(phoneNum);
     var reg = new RegExp(regu);
-    // validate if phone number by regexp
+    // Verify whether phone number by regxp
     var flag = reg.test(phoneNum);
     if(flag == true){
       var xmlhttp;
       if (window.XMLHttpRequest)
       {
-        // IE7+,Firedox,Chrome,opera,Safari browser run code
-        xmlhttp = new XMLHttpRequest();
+          //  IE7+, Firefox, Chrome, Opera, Safari execute
+          xmlhttp=new XMLHttpRequest();
       }
       else
       {
-        // IE6,IE5 run code
-        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+          // IE6, IE5 execute
+          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
       }
       xmlhttp.onreadystatechange=function()
       {
-        if(xmlhttp.readyState==4 && xmlhttp.status==200)
-        {
-          // transmit value from server to msg
-          eval('var data = '+ xmlhttp.responseText);
-          // console.log(data);
-          var s=data['phone']+'('+data['operators']+') phone number from: '+data['style_citynm'];
-          document/getElementById('zone').innerHTML =s;
-
-        }
+          if (xmlhttp.readyState==4 && xmlhttp.status==200)
+          {
+              // Assign the value returned by the server to msg
+              eval('var data = '+ xmlhttp.responseText);
+              // console.log(data);
+              var s=data['phone']+'('+data['operators']+')The number belong in: '+data['style_citynm'];
+              document.getElementById('zone').innerHTML = s;
+          }
       }
-      xmlhttp.open("GET","SearchController.php?phoneMum="+phoneNum,true);
+      xmlhttp.open("GET","SearchController.php?phoneNum="+phoneNum,true);
       xmlhttp.send();
     }else{
-      alert('please input correct phone number');
+      alert('Please input correct phone number');
     }
+
   }
+
   </script>
 </html>
